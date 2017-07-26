@@ -1,10 +1,13 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 
+import TitleHeader from '../../shared/TitleHeader/TitleHeader.js';
+
 class Login extends Component {
   render(){
     return(
       <div className='login'>
+        <TitleHeader title='login'/>
          <h6>login</h6>
          <h1>登录</h1>
          <h4>连接一个个小而确定的幸福</h4>
