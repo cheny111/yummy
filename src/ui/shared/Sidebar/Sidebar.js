@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
 import './Sidebar.css';
 import { slide as Menu } from 'react-burger-menu';
 
@@ -12,15 +13,30 @@ class Sidebar extends Component {
       isOpen:false
     })
   }
+  logout=()=>{
+    localStorage.removeItem('userId')
+    this.props.dispatch({type:'LOG_OUT'})
+  }
   render() {
+    let authStr=(
+      <div>
+        <Link to='/login' onClick={this.closeBmMenu}>登录</Link>|
+        <Link to='/signup' onClick={this.closeBmMenu}>注册</Link>
+      </div>
+    )
+    let userInfo=(
+      <div>
+        <Link to="" className="bm-user-left">{this.props.currentUser}</Link>
+        <Link to="" className="bm-user-right" onClick={this.logout}>退出</Link>
+      </div>
+    )
     return(
       <div className='sidebar'>
         <Menu isOpen={this.state.isOpen}>
           <div className='bm-user-info'>
             <img src='http://media.haoduoshipin.com/yummy/default-avatar.png' alt='avatar'/>
             <div className='bm-user-auth'>
-              <Link to='' className='bm-user-left'>happyPeter</Link>
-              <Link to='' className='bm-user-right'>退出</Link>
+              {this.props.isAuthenticated? userInfo:authStr}
             </div>
           </div>
           <div className="bm-link-list">
@@ -37,4 +53,9 @@ class Sidebar extends Component {
     )
   }
 }
-export default Sidebar;
+
+const mapStateToProps = (state) => ({
+  currentUser: state.account.currentUser,
+  isAuthenticated: state.account.isAuthenticated
+})
+export default connect(mapStateToProps)(Sidebar);
