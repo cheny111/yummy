@@ -5,12 +5,15 @@
   "dependencies": {
     "antd": "^2.12.2",
     "axios": "^0.16.2",
+    "moment": "^2.18.1",
     "react": "^15.6.1",
     "react-burger-menu": "^2.1.4",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.10",
+    "react-toggle": "^4.0.1",
+    "recharts": "^1.0.0-alpha.2",
     "redux": "^3.7.2"
   },
   "scripts": {
@@ -20,6 +23,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "babel-plugin-import": "^1.2.1"
+    "babel-plugin-import": "^1.2.1",
+    "recharts": "^1.0.0-alpha.2"
   }
 }

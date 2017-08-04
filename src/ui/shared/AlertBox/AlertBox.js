@@ -1,22 +1,31 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import './alert-box.css';
-// import store from '../../../redux/store.js';
+import store from '../../../redux/store.js';
 
 class AlertBox extends Component {
-  closeAlert = () => {
-    this.props.dispatch({type:'HIDE_ALERT'})
+
+  componentDidMount = () => {
+    var fixed = document.getElementById('fixed');
+    fixed.addEventListener('touchmove', (e) => {
+      e.preventDefault()
+    })
+    fixed.addEventListener('wheel', (e) => {
+      e.preventDefault()
+    });
   }
 
   render() {
     return(
-      <div className={this.props.showAlert ? "alert-box show" : "alert-box" }>
-        <div className="alert-content-card">
-          <div className="alert-msg">
-            {this.props.alertMsg}
-          </div>
-          <div onClick={this.closeAlert}
-            className="alert-close-button">
+      <div id="fixed" ref={value => { this.alertDiv = value }}
+        className={this.props.showAlert ? "alert-box show": "alert-box"}>
+        <div className="alert-box-card">
+          { this.props.alertMessage }
+          <div
+            onClick={() => {
+              store.dispatch({ type: 'HIDE_ALERT' })
+            }}
+            className="alert-actions">
             关闭
           </div>
         </div>
@@ -24,8 +33,10 @@ class AlertBox extends Component {
     )
   }
 }
-const mapStateToProps=(state)=>({
-  showAlert:state.app.showAlert,
-  alertMsg:state.app.alertMsg
+
+const mapStateToProps = (state) => ({
+  showAlert: state.account.showAlert,
+  alertMessage: state.account.alertMessage
 })
-export default connect(mapStateToProps)(AlertBox);
+
+export default connect(mapStateToProps)(AlertBox)

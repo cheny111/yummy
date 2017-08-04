@@ -1,20 +1,20 @@
 .bm-burger-button {
-  position: fixed;
-  width: 36px;
-  height: 30px;
-  left: 36px;
-  top: 36px;
+  position: absolute;
+  width: 18px;
+  height: 12px;
+  left: 17px;
+  top: 42px;
 }
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #373a47;
+  background: #fff;
 }
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-  height: 24px;
-  width: 24px;
+  /*height: 24px;
+  width: 24px;*/
 }
 
 /* Color/shape of close button cross */
@@ -24,7 +24,7 @@
 
 /* General sidebar styles */
 .bm-menu {
-  background: #373a47;
+  background: #fff;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
@@ -46,7 +46,9 @@
 }
 
 
-/* peter custom */
+/* peter custom styling */
+
+
 
 .bm-item-list {
   display: flex;
@@ -54,80 +56,60 @@
   justify-content: space-between;
 }
 
-/* Position and sizing of burger button */
-.bm-burger-button {
-  width: 18px;
-  height: 12px;
-  left: 20px;
-  top: 46px;
+.bm-menu .user-info {
+  flex-shrink: 0;
+}
+.bm-link-list {
+  flex-grow: 2;
 }
 
-.bm-burger-button .bm-burger-bars {
-  background-color: #fff;
-}
-
-.bm-menu {
-  background-color: #fff;
-  padding: 0;
-}
-
-.bm-cross-button {
-  display: none;
-}
-
-
-/*  userInfo  */
-
-.bm-menu img {
-  width: 55px;
-  height: 55px;
-  border-right: 50%;
+.bm-link-list a {
   display: block;
-  margin: 0 auto;
-  margin-top: 34px;
-}
-
-.bm-link-list>a {
-  display: block;
-  line-height: 55px;
+  line-height: 56px;
   border-bottom: 1px solid #E3E9EC;
-  padding-left: 20px;
+  padding-left: 10px;
   font-size: 12px;
   color: #878787;
 }
 
-.bm-user-auth {
-  text-align: center;
-}
-
-.bm-user-auth a {
-  display: inline-block;
+.bm-menu .user-info-text, .bm-menu .user-info-text a {
   font-size: 14px;
   color: #F77062;
+  text-align: center;
+  line-height: 1.0;
 }
 
-.bm-user-auth {
-  margin-top: 7px;
+.bm-menu .user-info-text {
+  display: block;
+  margin: 16px auto;
 }
 
-.bm-user-auth .bm-user-left {
+.bm-user-name {
+  display: inline-block;
   padding-right: 5px;
   border-right: 2px solid #F77062;
-  line-height: 1;
 }
-.bm-user-auth .bm-user-right {
+
+.bm-menu .user-info-text a {
   padding-left: 5px;
 }
 
-.bm-close-button {
-  width: 166px;
-  line-height: 39px;
-  display: block;
+.bm-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
   margin: 0 auto;
+  display: block;
+}
+
+.bm-close-button {
+  display: block;
+  color: white;
   background-image: linear-gradient(-45deg, #F77062 0%, #FE5196 100%);
   border-radius: 2px;
   font-size: 14px;
-  color: #FFFFFF;
-  margin-bottom: 30px;
   border: 0;
+  width: 80%;
+  margin: 30px auto;
+  line-height: 39px;
 }

@@ -1,61 +1,70 @@
 import React,{Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import './Sidebar.css';
 import { slide as Menu } from 'react-burger-menu';
+import store from '../../../redux/store.js'
 
 class Sidebar extends Component {
-  state={
-    isOpen:false
+
+  state = {
+    isOpen: false
   }
-  closeBmMenu=()=>{
+
+  closeMenu = () =>{
     this.setState({
-      isOpen:false
+      isOpen: false
     })
   }
-  logout=()=>{
+
+  logout = () => {
     localStorage.removeItem('userId')
-    this.props.dispatch({type:'LOG_OUT'})
+    store.dispatch({ type: 'LOG_OUT' })
+    this.props.history.push('/')
   }
-  render() {
-    let authStr=(
-      <div>
-        <Link to='/login' onClick={this.closeBmMenu}>登录</Link>|
-        <Link to='/signup' onClick={this.closeBmMenu}>注册</Link>
+
+  render () {
+    const { currentUser, isAuthenticated } = this.props.account
+    let userInfo = (
+      <div onClick={this.closeMenu} className="user-info-text">
+        <Link to="/profile" className="bm-user-name">
+          {currentUser}
+        </Link>
+        <Link to="" onClick={this.logout}>退出</Link>
       </div>
     )
-    let userInfo=(
-      <div>
-        <Link to="" className="bm-user-left">{this.props.currentUser}</Link>
-        <Link to="" className="bm-user-right" onClick={this.logout}>退出</Link>
-      </div>
+
+    let profileLink =(
+      <Link onClick={this.closeMenu} to="/profile" className="menu-item" >个人中心</Link>
     )
-    return(
-      <div className='sidebar'>
-        <Menu isOpen={this.state.isOpen}>
-          <div className='bm-user-info'>
-            <img src='http://media.haoduoshipin.com/yummy/default-avatar.png' alt='avatar'/>
-            <div className='bm-user-auth'>
-              {this.props.isAuthenticated? userInfo:authStr}
+
+    let loginLink =(
+      <Link onClick={this.closeMenu} to="/login" className="menu-item" >登录</Link>
+    )
+
+    return (
+      <Menu isOpen={this.state.isOpen}
+            customCrossIcon={ false }>
+            <div className="user-info">
+              <img className="bm-img"
+                src="http://media.haoduoshipin.com/yummy/default-avatar.png" alt="avatar" />
+              {isAuthenticated ? userInfo : ''}
             </div>
-          </div>
-          <div className="bm-link-list">
-            <Link to='/user' onClick={this.closeBmMenu}>个人中心</Link>
-            <Link to='/user' onClick={this.closeBmMenu}>首页</Link>
-            <Link to='/cart' onClick={this.closeBmMenu}>购物车</Link>
-            <Link to='/dishes' onClick={this.closeBmMenu}>猜你喜欢</Link>
-          </div>
-          <button className='bm-colse-button' onClick={this.closeBmMenu}>
-            关闭
-          </button>
-        </Menu>
-      </div>
-    )
+            <div className="bm-link-list">
+              <Link onClick={this.closeMenu} to="/" className="menu-item" >首页</Link>
+              {isAuthenticated ? profileLink : loginLink}
+              <Link onClick={this.closeMenu} to="/dishes" className="menu-item" >猜你喜欢</Link>
+            </div>
+            <div className="bottom-button">
+              <button onClick={this.closeMenu} className ="bm-close-button" >关闭</button>
+            </div>
+      </Menu>
+    );
   }
 }
 
 const mapStateToProps = (state) => ({
-  currentUser: state.account.currentUser,
-  isAuthenticated: state.account.isAuthenticated
+  account: state.account
 })
-export default connect(mapStateToProps)(Sidebar);
+
+export default connect(mapStateToProps)(withRouter(Sidebar))
