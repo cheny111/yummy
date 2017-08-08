@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import {BrowserRouter as Router,Route,Switch,Redirect} from 'react-router-dom';
+import {HashRouter as Router,Route,Switch,Redirect} from 'react-router-dom';
 import axios from 'axios'
 import {connect} from 'react-redux'
 import Home from './ui/pages/Home/Home.js';
